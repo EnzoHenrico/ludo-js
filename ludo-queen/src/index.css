@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+:root {
+  --red: #ff0000;
+  --green: #4caf50;
+  --blue: #3f51b5;
+  --yellow: #ffeb3b;
+}
