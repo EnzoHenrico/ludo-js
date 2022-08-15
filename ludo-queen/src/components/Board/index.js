@@ -1,5 +1,5 @@
 import styles from './Board.module.css';
-import Squares from './Squares';
+import Square from './Square';
 
 const Board = () => {
   // Render all board  
@@ -11,7 +11,7 @@ const Board = () => {
 
   return (
     <section className={styles.board}>
-      {squares.map(({ key, x, y }) => <Squares key={key} x={x} y={y} />)}
+      {squares.map(({ key, x, y }) => <Square key={key} x={x} y={y} />)}
     </section>
   );
 }
