@@ -1,8 +1,6 @@
 import styles from './PiecePlaces.module.css';
-import Pieces from '../../Pieces';
 
-const PiecePlaces = () => {
-
+const PiecePlaces = () => {   
   return (
   <>
     <div className={`${styles.containerPlace} ${styles.red}`}>

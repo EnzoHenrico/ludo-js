@@ -1,27 +1,27 @@
 .containerPlace {
   display: grid;
   grid-template-columns: 50px 50px;
-  grid-gap: 57px;
+  grid-gap: 53px 56px;
 }
 
 .red {
   position: absolute;
-  transform: translate(80px, -720px);
+  transform: translate(82px, 82px);
 }
 
 .green {
   position: absolute;
-  transform: translate(561px, -720px);
+  transform: translate(562px,82px);
 }
 
 .blue {
   position: absolute;
-  transform: translate(80px, -238px);
+  transform: translate(82px, 560px);
 }
 
 .yellow {
   position: absolute;
-  transform: translate(561px, -238px);
+  transform: translate(562px, 560px);
 }
 
 .redPlace{

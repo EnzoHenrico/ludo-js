@@ -1,4 +1,3 @@
-
 const red = 'var(--red)';
 const green = 'var(--green)';
 const blue = 'var(--blue)';
@@ -28,4 +27,77 @@ const squareColors = {
   '0,14': blue,'1,14': blue,'2,14': blue,'3,14': blue,'4,14': blue, '5,14': blue,                                  '9,14': yellow, '10,14': yellow, '11,14': yellow, '12,14': yellow, '13,14': yellow, '14,14': yellow,  
 };
 
-export default squareColors;
+const pieceInitialPlace = {
+  // Blue pieces
+  "2,11": {
+    number: '1',
+    color: "blue",
+  },
+  "3,11": {
+    number: '1',
+    color: "blue",
+  },
+  "2,12": {
+    number: '1',
+    color: "blue",
+  },
+  "3,12": {
+    number: '1',
+    color: "blue",
+  },
+
+  // Green pieces
+  "11,2": {
+    number: '1',
+    color: "green",
+  },
+  "11,3": {
+    number: '1',
+    color: "green",
+  },
+  "12,2": {
+    number: '1',
+    color: "green",
+  },
+  "12,3": {
+    number: '1',
+    color: "green",
+  },
+
+  // Yellow pieces
+  "11,11": {
+    number: '1',
+    color: "yellow",
+  },
+  "12,11": {
+    number: '1',
+    color: "yellow",
+  },
+  "11,12": {
+    number: '1',
+    color: "yellow",
+  },
+  "12,12": {
+    number: '1',
+    color: "yellow",
+  },
+  // Red pieces
+  "2,2": {
+    number: '1',
+    color: "red",
+  },
+  "3,2": {
+    number: '1',
+    color: "red",
+  },
+  "2,3": {
+    number: '1',
+    color: "red",
+  },
+  "3,3": {
+    number: '1',
+    color: "red",
+  },
+}
+
+export {squareColors, pieceInitialPlace};

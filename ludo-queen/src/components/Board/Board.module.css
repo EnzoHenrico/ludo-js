@@ -1,11 +1,15 @@
 .board {
   position: relative;
-}
-
-.squares {
   width: 800px;
   height: 800px;
   display: grid;
   grid-template-columns: repeat(15, 1fr);
   grid-template-rows: repeat(15, 1fr);
+}
+.container {
+  position: relative;
+}
+
+.square {
+  border: 1px solid black;
 }
