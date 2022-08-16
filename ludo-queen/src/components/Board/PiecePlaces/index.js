@@ -29,7 +29,7 @@ const PiecePlaces = () => {
       <div className={styles.yellowPlace}/>
       <div className={styles.yellowPlace}/>
     </div>
-  </> 
+  </>
   );
 }
 

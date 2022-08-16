@@ -1,14 +1,11 @@
 .board {
+  position: relative;
+}
+
+.squares {
   width: 800px;
   height: 800px;
   display: grid;
   grid-template-columns: repeat(15, 1fr);
   grid-template-rows: repeat(15, 1fr);
-}
-
-.piece {
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  background-color: red;
 }

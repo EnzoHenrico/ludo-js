@@ -2,7 +2,6 @@ import styles from "./Board.module.css";
 import Square from "./Square";
 import squareColors from "./Square/squareColors";
 import PiecePlaces from "./PiecePlaces";
-import Pieces from "../Pieces";
 
 const Board = () => {
   const squares = [];
@@ -18,14 +17,14 @@ const Board = () => {
   }
 
   return (
-    <>
     <section className={styles.board}>
-      {squares.map(({ key, x, y, color }) => (
-        <Square key={key} x={x} y={y} color={color} />
-      ))}
-    </section>
+      <div className={styles.squares}>
+        {squares.map(({ key, x, y, color }) => (
+          <Square key={key} x={x} y={y} color={color} />
+        ))}
+      </div>
       <PiecePlaces />
-    </>
+    </section>
   );
 };
 
