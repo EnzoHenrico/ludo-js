@@ -1,27 +1,47 @@
-import styles from "./Board.module.css";
+import { useEffect, useRef } from 'react';
+
 import {squareColors, pieceInitialPlace} from "./boardDefaults";
+import styles from "./Board.module.css";
 import Piece from "../Piece";
+import Player from '../Player';
 
 const Board = () => {
   const squares = [];
-
-  // Render all board
+  // Temporary forced 4 players
+  const players = [
+  {
+    name: "player1", 
+    color: "blue",
+  },
+  {
+    name: "player2", 
+    color: "green",
+  },
+  {
+    name: "player3", 
+    color: "yellow",
+  },
+  {
+    name: "player4", 
+    color: "red",
+  },
+];
+  // Generate cordenates to color board
   for (let i = 0; i < 15 * 15; i++) {
-    const x = i % 15;
-    const y = Math.floor(i / 15);
-    const color = squareColors[`${x},${y}`] || "";
-    const piece = pieceInitialPlace[`${x},${y}`] || null;
-
-    squares.push({ x, y, color, piece });
+    const color = squareColors[`${i % 15},${Math.floor(i / 15)}`] || "";
+    squares.push({color});
   }
 
   return (
       <section className={styles.board}>
-        {squares.map(({ x, y, color, piece }, i) => (
-        <div key ={i} className={styles.square} data-x={x} data-y={y} style={{ background: color || ''}}>
-          {piece ? <Piece number={piece.number} color={piece.color}/> : null}
-        </div>
+        {squares.map((square, i) => ( // Render board
+          <div key ={i} className={styles.square} style={{ background: square.color || ''}}/>
         ))}
+        {players.map((player) => { // Render player pieces
+          for(let i = 1; i <= 4; i++){
+            <Piece key={`${player.color}-${i}`} number={i} color={player.color}/>
+          }
+        })}
       </section>
   );
 };

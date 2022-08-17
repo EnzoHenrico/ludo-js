@@ -100,4 +100,67 @@ const pieceInitialPlace = {
   },
 }
 
-export {squareColors, pieceInitialPlace};
+function getInitialPlaces(number, color){
+  switch ({number, color}){
+    case {color: "blue"}:
+      if({number: 1}) {
+        return "2,11";
+      }
+      if({number: 2}) {
+        return "3,11";
+      }
+      if({number: 3}) {
+        return "2,12";
+      }
+      if({number: 4}) {
+        return "3,12";
+      }
+    break;
+    case {color: "green"}:
+      if({number: 1}) {
+        return "11,2";
+      }
+      if({number: 2}) {
+        return "11,3";
+      }
+      if({number: 3}) {
+        return "12,2";
+      }
+      if({number: 4}) {
+        return "12,3";
+      }
+    break;
+    case {color: "yellow"}:
+      if({number: 1}) {
+        return "11,11";
+      }
+      if({number: 2}) {
+        return "12,11";
+      }
+      if({number: 3}) {
+        return "11,12";
+      }
+      if({number: 4}) {
+        return "12,12";
+      }
+    break;
+    case {color: "red"}:
+      if({number: 1}) {
+        return "2,2";
+      }
+      if({number: 2}) {
+        return "3,2";
+      }
+      if({number: 3}) {
+        return "2,3";
+      }
+      if({number: 4}) {
+        return "3,3";
+      }
+    break;
+    default:
+      return null; 
+  }
+}
+
+export {squareColors, pieceInitialPlace, getInitialPlaces};

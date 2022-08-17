@@ -1,7 +1,11 @@
+import { useState } from 'react';
+
 import styles from './Piece.module.css';
+import { getInitialPlaces } from '../Board/boardDefaults';
 
 const Piece = ({number, color}) => {
-  
+  const [pieceStatus, setPieceStatus] = useState({ currSquare: getInitialPlaces(number, color), isHome: true, isSafe: true });
+
   const redPathing = [
     { x: 1, y: 6 }, { x: 2, y : 6 }, { x: 3, y: 6 }, { x: 4, y: 6 }, { x: 5, y: 6 }, 
     { x: 6, y: 5 }, { x: 6, y : 4 }, { x: 6, y: 3 }, { x: 6, y: 2 }, { x: 6, y: 1 }, { x: 6, y: 0 }, 
@@ -35,9 +39,8 @@ const Piece = ({number, color}) => {
     "1,0", "1,0", "1,0", "1,0", "1,0", "1,0"
   ];
 
-
   return (
-      <img alt="pin" src={`${color}_pin.svg`} className={styles.piece}  key={`${color}-piece-${number}`}/>
+      <img key={`${color}-piece-${number}`} alt="pin" src={`${color}_pin.svg`} className={styles.piece} />
   );
 };
 
