@@ -1,5 +1,5 @@
 
-import {squareColors, especialColors} from "./boardDefaults";
+import { squareColors } from "./boardDefaults";
 import styles from "./Board.module.css";
 import Piece from "../Piece";
 import Dice from "../Dice";
@@ -30,25 +30,7 @@ const Board = () => {
   for (let i = 0; i < 15 * 15; i++) {
     const x = (i % 15);
     const y = Math.floor(i / 15);
-    let color;
-    
-    if(x === 6 && y === 6) {
-      color = especialColors.topLeft
-    }
-    else if(x === 6 && y === 8) {
-      color = especialColors.topRight
-    }
-    else if(x === 7 && y === 7) {
-       color = especialColors.center
-    }
-    else if(x === 8 && y === 6) {
-      color = especialColors.btmLeft
-    }
-    else if(x === 8 && y === 8) {
-       color = especialColors.btmRight
-    } else{
-       color = squareColors[x][y];
-    };
+    const color = squareColors[x][y];
 
     squares.push({color, x, y});
   }
