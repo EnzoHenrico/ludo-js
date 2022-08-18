@@ -29,21 +29,17 @@
 
 .pieceBase-1{
   border-radius: 50%;
-  border: 1px solid black;
   transform: scale(1.2) translate(-40%, -45%);
 }
 .pieceBase-2{
   border-radius: 50%;
-  border: 1px solid black;
   transform: scale(120%) translate(43%, -45%);
 }
 .pieceBase-3{
   border-radius: 50%;
-  border: 1px solid black;
   transform: scale(1.2) translate(-40%, 40%);  
 }
 .pieceBase-4{
   border-radius: 50%;
-  border: 1px solid black;
   transform: scale(1.2) translate(43%, 40%);
 }

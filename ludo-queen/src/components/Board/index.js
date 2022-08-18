@@ -31,8 +31,9 @@ const Board = () => {
     const x = (i % 15);
     const y = Math.floor(i / 15);
     const color = squareColors[x][y];
+    const border = color === 1 ? "none" : "1px solid black"
 
-    squares.push({color, x, y});
+    squares.push({color, border, x, y});
   }
 
   const rollResult= () => Math.floor(Math.random() * (7 - 1) ) + 1;
@@ -40,8 +41,8 @@ const Board = () => {
   return (
     <>
       <section className={styles.board}>
-        {squares.map(({color, x ,y}, i) => ( // Render board
-          <div key ={i} className={styles.square} style={{ background: (color || ''), gridArea: `${x + 1}/${y + 1}` }}/>
+        {squares.map(({color, border, x ,y}, i) => ( // Render board
+          <div key ={i} className={styles.square} style={{ border, background: (color), gridArea: `${x + 1}/${y + 1}` }}/>
         ))}
         { players.map((player) => { // Render player pieces
           return Array.apply(null, Array(5)).map((e, i) => i !== 0 && <Piece key={`${player.color}-${i}`} number={i} color={player.color}/>)
