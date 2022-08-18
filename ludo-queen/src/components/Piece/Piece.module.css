@@ -1,45 +1,6 @@
 .pieceBase-1,
-.blue-piece-1,
-.green-piece-1,
-.yellow-piece-1,
-.red-piece-1{
-  transform: translate(-50%, -50%);
-}
 .pieceBase-2,
-.blue-piece-2,
-.green-piece-2,
-.yellow-piece-2,
-.red-piece-2{
-  transform: translate(50%, -50%);
-}
 .pieceBase-3,
-.blue-piece-3,
-.green-piece-3,
-.yellow-piece-3,
-.red-piece-3{
-  transform: translate(-50%, 50%);
-}
-.pieceBase-4,
-.blue-piece-4,
-.green-piece-4,
-.yellow-piece-4,
-.red-piece-4{
-  transform: translate(50%, 50%);
-}
-
-.pieceBase-1{
-  border-radius: 50%;
-  transform: scale(1.2) translate(-40%, -45%);
-}
-.pieceBase-2{
-  border-radius: 50%;
-  transform: scale(120%) translate(43%, -45%);
-}
-.pieceBase-3{
-  border-radius: 50%;
-  transform: scale(1.2) translate(-40%, 40%);  
-}
 .pieceBase-4{
   border-radius: 50%;
-  transform: scale(1.2) translate(43%, 40%);
 }

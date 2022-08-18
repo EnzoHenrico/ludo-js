@@ -1,3 +1,4 @@
+import { useState } from "react";
 
 import { squareColors } from "./boardDefaults";
 import styles from "./Board.module.css";
@@ -5,7 +6,9 @@ import Piece from "../Piece";
 import Dice from "../Dice";
 
 const Board = () => {
+  const [diceNumber, setDiceNumber] = useState(1);
   const squares = [];
+
   // Temporary forced 4 players
   const players = [
     {
@@ -36,7 +39,9 @@ const Board = () => {
     squares.push({color, border, x, y});
   }
 
-  const rollResult= () => Math.floor(Math.random() * (7 - 1) ) + 1;
+  const handleRoll = () => {
+    setDiceNumber(Math.floor(Math.random() * (7 - 1)) + 1);
+  }
 
   return (
     <>
@@ -45,10 +50,11 @@ const Board = () => {
           <div key ={i} className={styles.square} style={{ border, background: (color), gridArea: `${x + 1}/${y + 1}` }}/>
         ))}
         { players.map((player) => { // Render player pieces
-          return Array.apply(null, Array(5)).map((e, i) => i !== 0 && <Piece key={`${player.color}-${i}`} number={i} color={player.color}/>)
+          return Array.apply(null, Array(5)).map((e, i) => i !== 0 && <Piece key={`${player.color}-${i}`} number={i} color={player.color} diceNumber={diceNumber}/>)
         })}
       </section>
-      <Dice rollResult={rollResult()}/>
+      <Dice rollResult={diceNumber}/>
+      <button onClick={handleRoll}>roll</button>
     </>
   );
 };
