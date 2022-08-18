@@ -2,6 +2,7 @@
 import {squareColors, especialColors} from "./boardDefaults";
 import styles from "./Board.module.css";
 import Piece from "../Piece";
+import Dice from "../Dice";
 
 const Board = () => {
   const squares = [];
@@ -52,7 +53,10 @@ const Board = () => {
     squares.push({color, x, y});
   }
 
+  const rollResult= () => Math.floor(Math.random() * (7 - 1) ) + 1;
+
   return (
+    <>
       <section className={styles.board}>
         {squares.map(({color, x ,y}, i) => ( // Render board
           <div key ={i} className={styles.square} style={{ background: (color || ''), gridArea: `${x + 1}/${y + 1}` }}/>
@@ -61,6 +65,8 @@ const Board = () => {
           return Array.apply(null, Array(5)).map((e, i) => i !== 0 && <Piece key={`${player.color}-${i}`} number={i} color={player.color}/>)
         })}
       </section>
+      <Dice rollResult={rollResult()}/>
+    </>
   );
 };
 
