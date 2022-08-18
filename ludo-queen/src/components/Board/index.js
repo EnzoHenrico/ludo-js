@@ -1,46 +1,64 @@
-import { useEffect, useRef } from 'react';
 
-import {squareColors, pieceInitialPlace} from "./boardDefaults";
+import {squareColors, especialColors} from "./boardDefaults";
 import styles from "./Board.module.css";
 import Piece from "../Piece";
-import Player from '../Player';
 
 const Board = () => {
   const squares = [];
   // Temporary forced 4 players
   const players = [
-  {
-    name: "player1", 
-    color: "blue",
-  },
-  {
-    name: "player2", 
-    color: "green",
-  },
-  {
-    name: "player3", 
-    color: "yellow",
-  },
-  {
-    name: "player4", 
-    color: "red",
-  },
-];
+    {
+      name: "player1", 
+      color: "blue",
+    },
+    {
+      name: "player2", 
+      color: "green",
+    },
+    {
+      name: "player3", 
+      color: "yellow",
+    },
+    {
+      name: "player4", 
+      color: "red",
+    }
+  ];
+
   // Generate cordenates to color board
   for (let i = 0; i < 15 * 15; i++) {
-    const color = squareColors[`${i % 15},${Math.floor(i / 15)}`] || "";
-    squares.push({color});
+    const x = (i % 15);
+    const y = Math.floor(i / 15);
+    let color;
+    
+    if(x === 6 && y === 6) {
+      color = especialColors.topLeft
+    }
+    else if(x === 6 && y === 8) {
+      color = especialColors.topRight
+    }
+    else if(x === 7 && y === 7) {
+       color = especialColors.center
+    }
+    else if(x === 8 && y === 6) {
+      color = especialColors.btmLeft
+    }
+    else if(x === 8 && y === 8) {
+       color = especialColors.btmRight
+    } else{
+       color = squareColors[x][y];
+    };
+
+    squares.push({color, x, y});
   }
 
   return (
       <section className={styles.board}>
-        {squares.map((square, i) => ( // Render board
-          <div key ={i} className={styles.square} style={{ background: square.color || ''}}/>
+        {squares.map(({color, x ,y}, i) => ( // Render board
+          <div key ={i} className={styles.square} style={{ background: (color || ''), gridArea: `${x + 1}/${y + 1}` }}/>
         ))}
-        {players.map((player) => { // Render player pieces
-          for(let i = 1; i <= 4; i++){
-            <Piece key={`${player.color}-${i}`} number={i} color={player.color}/>
-          }
+        { players.map((player) => { // Render player pieces
+          return Array.apply(null, Array(5)).map((e, i) => i !== 0 && <Piece key={`${player.color}-${i}`} number={i} color={player.color}/>)
         })}
       </section>
   );
