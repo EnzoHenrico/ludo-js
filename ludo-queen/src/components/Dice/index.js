@@ -2,7 +2,7 @@ import styles from './Dice.module.css';
 
 const Dice = ({ roll, rollResult }) => {
 
-  function rollDice(result){
+  function displayResult(result){
     if(result === 2) {
       return (<>
         <div className={`${styles.dot} ${styles.top} ${styles.left}`}></div>
@@ -45,13 +45,13 @@ const Dice = ({ roll, rollResult }) => {
     } else {
       return <div className={`${styles.dot} ${styles.middle} ${styles.center}`}></div>;
     }
-}
-
-
+  }
+ 
   
+
   return(
     <div onClick={roll} className={styles.face}>
-      {rollDice(rollResult)}
+      {displayResult(rollResult)}
     </div>
   );
 }

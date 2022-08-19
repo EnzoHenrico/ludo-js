@@ -13,19 +13,19 @@ const Board = () => {
   // Temporary forced 4 players
   const players = [
     {
-      name: "player 1", 
+      name: "Player 1", 
       color: "blue",
     },
     {
-      name: "player 2", 
+      name: "Player 2", 
       color: "green",
     },
     {
-      name: "player 3", 
+      name: "Player 3", 
       color: "yellow",
     },
     {
-      name: "player 4", 
+      name: "Player 4", 
       color: "red",
     }
   ];
@@ -35,7 +35,7 @@ const Board = () => {
     const x = (i % 15);
     const y = Math.floor(i / 15);
     const color = squareColors[x][y];
-    const border = color === 'white' ? "none" : "1px solid"
+    const border = color === 'white' ? "none" : "1px solid";
 
     squares.push({color, border, x, y});
   }

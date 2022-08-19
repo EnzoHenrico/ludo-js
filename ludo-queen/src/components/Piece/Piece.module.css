@@ -4,3 +4,22 @@
 .pieceBase-4{
   border-radius: 50%;
 }
+
+.blue-piece-1,
+.blue-piece-2,
+.blue-piece-3,
+.blue-piece-4,
+.green-piece-1,
+.green-piece-2,
+.green-piece-3,
+.green-piece-4,
+.yellow-piece-1,
+.yellow-piece-2,
+.yellow-piece-3,
+.yellow-piece-4,
+.red-piece-1,
+.red-piece-2,
+.red-piece-3,
+.red-piece-4{
+  cursor: pointer;
+}

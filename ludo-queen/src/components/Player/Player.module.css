@@ -2,10 +2,12 @@
 .green-data,
 .yellow-data,
 .red-data {
+  background-color: #f2f4f5;
   padding: 10px;
   border-radius: 4px;
   align-self: center;
   margin: 0 auto;
+  box-shadow: 4px 3px 3px #888888;
 }
 
 .blue-data {
