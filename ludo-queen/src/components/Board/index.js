@@ -34,7 +34,7 @@ const Board = () => {
     const x = (i % 15);
     const y = Math.floor(i / 15);
     const color = squareColors[x][y];
-    const border = color === 1 ? "none" : "1px solid black"
+    const border = color === 'white' ? "none" : "1px solid"
 
     squares.push({color, border, x, y});
   }
@@ -44,18 +44,17 @@ const Board = () => {
   }
 
   return (
-    <>
+    <div className={styles.hero}>
       <section className={styles.board}>
         {squares.map(({color, border, x ,y}, i) => ( // Render board
-          <div key ={i} className={styles.square} style={{ border, background: (color), gridArea: `${x + 1}/${y + 1}` }}/>
+          <div key ={i} className={styles.square} style={{ outline: border, background: (color || 'white'), gridArea: `${x + 1}/${y + 1}` }}/>
         ))}
         { players.map((player) => { // Render player pieces
           return Array.apply(null, Array(5)).map((e, i) => i !== 0 && <Piece key={`${player.color}-${i}`} number={i} color={player.color} diceNumber={diceNumber}/>)
         })}
       </section>
-      <Dice rollResult={diceNumber}/>
-      <button onClick={handleRoll}>roll</button>
-    </>
+      <Dice roll={handleRoll} rollResult={diceNumber}/>
+    </div>
   );
 };
 

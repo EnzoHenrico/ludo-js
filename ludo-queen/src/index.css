@@ -1,4 +1,5 @@
 body {
+  background-color: var(--violet);
   margin: 0;
 	padding: 0;
 	border: 0;
@@ -12,4 +13,5 @@ body {
   --green: #4caf50;
   --blue: #3f51b5;
   --yellow: #ffeb3b;
+  --violet: #b7c9fc;
 }

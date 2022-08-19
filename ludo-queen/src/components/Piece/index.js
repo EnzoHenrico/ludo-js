@@ -21,7 +21,7 @@ const Piece = ({number, color, diceNumber}) => {
     if(color === 'blue'){
       return bluePath;
     }
-    if(color === 'green '){
+    if(color === 'green'){
       return greenPath;
     }
     if(color === 'yellow'){

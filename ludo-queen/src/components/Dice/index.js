@@ -1,6 +1,6 @@
 import styles from './Dice.module.css';
 
-const Dice = ({ rollResult }) => {
+const Dice = ({ roll, rollResult }) => {
 
   function rollDice(result){
     if(result === 2) {
@@ -46,9 +46,11 @@ const Dice = ({ rollResult }) => {
       return <div className={`${styles.dot} ${styles.middle} ${styles.center}`}></div>;
     }
 }
+
+
   
   return(
-    <div className={styles.face}>
+    <div onClick={roll} className={styles.face}>
       {rollDice(rollResult)}
     </div>
   );

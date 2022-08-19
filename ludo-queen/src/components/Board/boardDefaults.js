@@ -17,7 +17,7 @@ const x = `linear-gradient(-45deg, ${b} 50%, ${r} 50%) no-repeat`;
 // Bottom right corner
 const z = `linear-gradient(45deg, ${b} 50%, ${y} 50%) no-repeat`;
 // White squares without border
-const w = 1;
+const w = 'white';
 
 const squareColors = [
   [r,r,r,r,r,r,0,0,0,g,g,g,g,g,g], // 1 
