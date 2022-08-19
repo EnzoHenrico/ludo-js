@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { getInitialPlaces } from '../Board/boardDefaults';
-import { bluePath, greenPath, yeloowPath, redPath } from './piecePathing';
+import getInitialPlaces from './models/positions';
+import { bluePath, greenPath, yeloowPath, redPath } from './models/paths';
 import styles from './Piece.module.css';
 
 const Piece = ({number, color, diceNumber}) => {

@@ -1,0 +1,22 @@
+.blue-data,
+.green-data,
+.yellow-data,
+.red-data {
+  padding: 10px;
+  border-radius: 4px;
+  align-self: center;
+  margin: 0 auto;
+}
+
+.blue-data {
+  grid-area: 2/1;
+}
+.green-data {
+  grid-area: 1/2;
+}
+.yellow-data {
+  grid-area: 2/2;
+}
+.red-data {
+  grid-area: 1/1;
+}

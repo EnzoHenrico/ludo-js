@@ -1,9 +1,10 @@
 import { useState } from "react";
 
-import { squareColors } from "./boardDefaults";
+import squareColors from "./models/colors";
 import styles from "./Board.module.css";
 import Piece from "../Piece";
 import Dice from "../Dice";
+import Player from "../Player";
 
 const Board = () => {
   const [diceNumber, setDiceNumber] = useState(1);
@@ -12,19 +13,19 @@ const Board = () => {
   // Temporary forced 4 players
   const players = [
     {
-      name: "player1", 
+      name: "player 1", 
       color: "blue",
     },
     {
-      name: "player2", 
+      name: "player 2", 
       color: "green",
     },
     {
-      name: "player3", 
+      name: "player 3", 
       color: "yellow",
     },
     {
-      name: "player4", 
+      name: "player 4", 
       color: "red",
     }
   ];
@@ -45,6 +46,10 @@ const Board = () => {
 
   return (
     <div className={styles.hero}>
+      <div className={styles.display}>
+      <Player players={players}/>
+      <Dice roll={handleRoll} rollResult={diceNumber}/>
+      </div>
       <section className={styles.board}>
         {squares.map(({color, border, x ,y}, i) => ( // Render board
           <div key ={i} className={styles.square} style={{ outline: border, background: (color || 'white'), gridArea: `${x + 1}/${y + 1}` }}/>
@@ -53,7 +58,6 @@ const Board = () => {
           return Array.apply(null, Array(5)).map((e, i) => i !== 0 && <Piece key={`${player.color}-${i}`} number={i} color={player.color} diceNumber={diceNumber}/>)
         })}
       </section>
-      <Dice roll={handleRoll} rollResult={diceNumber}/>
     </div>
   );
 };
