@@ -1,12 +1,12 @@
 import { useContext, useState } from 'react';
 
 import { bluePath, greenPath, yeloowPath, redPath } from './models/paths';
-import getInitialPlaces from './models/positions';
 import { TurnContext } from '../../contexts/turn';
+import getInitialPlaces from './models/positions';
 import styles from './Piece.module.css';
 
 const Piece = ({ number, color }) => {
-  const {diceNumber} = useContext(TurnContext);
+  const { diceNumber, colorPlaying, finishMove } = useContext(TurnContext);
   const InitialPlace = getInitialPlaces(number, color);
   const [pieceStatus, setPieceStatus] = useState({ 
     currSquare: InitialPlace,
@@ -14,7 +14,6 @@ const Piece = ({ number, color }) => {
     isHome: true,
     isSafe: true,
     isInEnd: false,
-    isMoveble: false,
   });
   
   const pieceKey = `${color}-piece-${number}`;
@@ -38,6 +37,8 @@ const Piece = ({ number, color }) => {
   }
 
   const move = () => {
+    if(colorPlaying !== color || diceNumber === null) return;
+
     const crrIndex = pieceStatus.cordenateIndex;
     const nextIndex = crrIndex + diceNumber;
     const path = getPiecePath();
@@ -49,6 +50,8 @@ const Piece = ({ number, color }) => {
       const square = path[cordenate];
       setTimeout(() => setPieceStatus({...pieceStatus, currSquare: square, cordenateIndex: cordenate }), 500 * i);
     }
+    
+    setTimeout(() => finishMove(), 500 * diceNumber);
   }
 
   return (

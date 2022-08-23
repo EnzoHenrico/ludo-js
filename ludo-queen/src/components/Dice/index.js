@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { TurnContext } from '../../contexts/turn';
 
 import styles from './Dice.module.css';
@@ -50,7 +50,7 @@ const Dice = () => {
       <div className={`${styles.dot} ${styles.bottom} ${styles.right}`}></div>
     </>);
     } else {
-      return <div className={`${styles.dot} ${styles.middle} ${styles.center}`}></div>;
+      return <div className={`${styles.roll} ${styles.middle} ${styles.center}`}>Roll</div>;
     }
   }
 

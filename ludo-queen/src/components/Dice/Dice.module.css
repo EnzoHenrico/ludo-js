@@ -25,6 +25,10 @@
   animation: fi 300ms ease-in-out;
 }
 
+.roll {
+  place-self: center;
+}
+
 @keyframes fi {
     from {
         opacity: 0;
