@@ -1,6 +1,9 @@
+import { useState } from 'react';
+
 import styles from './Player.module.css';
 
 const Player = ({players}) => {
+  const [playerState, setPlayerState] = useState({ waiting: true, playing: false });
 
   return (
   <>

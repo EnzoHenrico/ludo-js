@@ -1,17 +1,20 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
-import getInitialPlaces from './models/positions';
 import { bluePath, greenPath, yeloowPath, redPath } from './models/paths';
+import getInitialPlaces from './models/positions';
+import { TurnContext } from '../../contexts/turn';
 import styles from './Piece.module.css';
 
-const Piece = ({number, color, diceNumber}) => {
+const Piece = ({ number, color }) => {
+  const {diceNumber} = useContext(TurnContext);
   const InitialPlace = getInitialPlaces(number, color);
   const [pieceStatus, setPieceStatus] = useState({ 
     currSquare: InitialPlace,
     cordenateIndex: 0,
     isHome: true,
     isSafe: true,
-    isInEnd: true,
+    isInEnd: false,
+    isMoveble: false,
   });
   
   const pieceKey = `${color}-piece-${number}`;

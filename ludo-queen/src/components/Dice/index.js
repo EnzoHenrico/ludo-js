@@ -1,8 +1,15 @@
+import { useContext, useEffect, useState } from 'react';
+import { TurnContext } from '../../contexts/turn';
+
 import styles from './Dice.module.css';
 
-const Dice = ({ roll, rollResult }) => {
+const Dice = () => {
+  const { rolledDice, setRolledDice, diceNumber, setDiceNumber } = useContext(TurnContext);
 
   function displayResult(result){
+    if(result === 1) {
+      return <div className={`${styles.dot} ${styles.middle} ${styles.center}`}></div>;
+    }
     if(result === 2) {
       return (<>
         <div className={`${styles.dot} ${styles.top} ${styles.left}`}></div>
@@ -46,12 +53,19 @@ const Dice = ({ roll, rollResult }) => {
       return <div className={`${styles.dot} ${styles.middle} ${styles.center}`}></div>;
     }
   }
- 
-  
 
+  const handleRoll = () => {
+    if(!rolledDice){
+      let roll = Math.floor(Math.random() * (7 - 1)) + 1;
+      setDiceNumber(roll);
+      if(roll === 6) return;
+      setRolledDice(true);
+    }
+  }
+  
   return(
-    <div onClick={roll} className={styles.face}>
-      {displayResult(rollResult)}
+    <div onClick={handleRoll} className={styles.face}>
+      {displayResult(diceNumber)}
     </div>
   );
 }
