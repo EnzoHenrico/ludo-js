@@ -9,6 +9,7 @@ import Piece from "../Piece";
 import Dice from "../Dice";
 
 const Board = () => {
+  const { colorPlaying } = useContext(TurnContext);
   const squares = [];
 
   // Temporary forced 4 players
@@ -31,6 +32,13 @@ const Board = () => {
     },
   ];
 
+  const positionsLayout = {
+    blue: "2/1",
+    red: "1/1",
+    green: "1/3",
+    yellow: "2/3",
+  };
+
   // Generate cordenates to color board
   for (let i = 0; i < 15 * 15; i++) {
     const x = i % 15;
@@ -43,7 +51,10 @@ const Board = () => {
 
   return (
     <div className={styles.hero}>
-      <div className={styles.display}>
+      <div
+        className={styles.display}
+        style={{ gridArea: `${positionsLayout[colorPlaying]}` }}
+      >
         <Player players={players} />
         <Dice />
       </div>

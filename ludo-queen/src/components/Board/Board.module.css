@@ -1,21 +1,26 @@
 .hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 350px 700px 350px;
+  grid-template-rows: 1fr 1fr;
   gap: 10px;
   padding: 10px;
 }
 
 .display {
-  background-color: bisque;
+  align-self: center;
+  background-color: rgba(255, 255, 255, 0.205);
+  border-radius: 8px;
+  width: 300px;
+  height: 150px;
   padding: 20px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 
 .board {
+  grid-area: 1 / 2 / span 2 / span 1;
   background-color: black;
   position: relative;
   display: grid;
@@ -30,4 +35,3 @@
 .container {
   position: relative;
 }
-

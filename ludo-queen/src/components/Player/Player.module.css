@@ -5,20 +5,13 @@
   background-color: #f2f4f5;
   padding: 10px;
   border-radius: 4px;
-  align-self: center;
-  margin: 0 auto;
-  box-shadow: 4px 3px 3px #888888;
 }
 
 .blue-data {
-  grid-area: 2/1;
 }
 .green-data {
-  grid-area: 1/2;
 }
 .yellow-data {
-  grid-area: 2/2;
 }
 .red-data {
-  grid-area: 1/1;
 }
