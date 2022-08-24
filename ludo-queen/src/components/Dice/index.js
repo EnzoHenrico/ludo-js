@@ -1,11 +1,18 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TurnContext } from "../../contexts/turn";
 
 import styles from "./Dice.module.css";
 
 const Dice = () => {
-  const { rolledDice, setRolledDice, diceNumber, setDiceNumber, checkIsHome } =
-    useContext(TurnContext);
+  const {
+    rolledDice,
+    setRolledDice,
+    diceNumber,
+    setDiceNumber,
+    checkIsHome,
+    movedPiece,
+  } = useContext(TurnContext);
+  const [disabled, setDisabled] = useState(false);
 
   function displayResult(result) {
     if (result === 1) {
@@ -103,8 +110,21 @@ const Dice = () => {
     }
   };
 
+  useEffect(() => {
+    if (rolledDice && !movedPiece) {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
+  }, [rolledDice]);
+
   return (
-    <div onClick={handleRoll} className={styles.face}>
+    <div
+      onClick={handleRoll}
+      className={
+        disabled ? `${styles.face} ${styles.disabled}` : `${styles.face}`
+      }
+    >
       {displayResult(diceNumber)}
     </div>
   );

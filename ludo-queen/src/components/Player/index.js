@@ -1,18 +1,27 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { TurnContext } from '../../contexts/turn';
 
 import styles from './Player.module.css';
 
 const Player = ({players}) => {
-  const [playerState, setPlayerState] = useState({ waiting: true, playing: false });
+  const { colorPlaying } = useContext(TurnContext);
+  const [playerNames, setPlayerNames ] = useState({
+    blue: "",
+    red: "",
+    green: "",
+    yellow: "",
+  });
+    
+  useEffect(() => {
+    const names = players.reduce((acc ,crr) => ({...acc, [crr.color]: crr.name }), '');
+    setPlayerNames(names);
+  }, []);
 
-  return (
-  <>
-    {players.map((player => (
-    <div key={`${player.name}-${player.color}`} className={styles[`${player.color}-data`]} style={{ border: ` 3px solid var(--${player.color})`}}>
-      <span className={styles.username}>{player.name}</span>
+  return (  
+    <div key={`${playerNames[colorPlaying]}-${colorPlaying}`} className={styles[`${colorPlaying}-data`]} style={{ border: ` 3px solid var(--${colorPlaying})`}}>
+      <span className={styles.username}>{playerNames[colorPlaying]}</span>
     </div>
-    )))}  
-  </>
+  
   );
 }
 

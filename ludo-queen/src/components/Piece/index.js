@@ -45,10 +45,24 @@ const Piece = ({ number, color }) => {
 
   const move = () => {
     if (colorPlaying !== color || diceNumber === null) return;
+    if (homeStats[pieceName] && diceNumber !== 6) return;
 
     const crrIndex = pieceStatus.cordenateIndex;
     const nextIndex = crrIndex + diceNumber;
     const path = getPiecePath();
+
+    if (pieceStatus.currSquare === InitialPlace && diceNumber === 6) {
+      setTimeout(() => {
+        setPieceStatus({
+          ...pieceStatus,
+          currSquare: path[1],
+          cordenateIndex: 1,
+        });
+        setHomeStats({ ...homeStats, [pieceName]: false });
+        finishMove();
+      }, 500);
+      return;
+    }
 
     if (crrIndex === path.length || nextIndex > path.length - 1) return;
 

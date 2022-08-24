@@ -32,14 +32,17 @@ const TurnProvider = ({ children }) => {
     "rolled dice? ": rolledDice,
     "dice number": diceNumber,
     "moved piece": movedPiece,
-    homeStats: homeStats,
+    "home stats": homeStats,
   });
 
   const finishMove = () => {
     setDiceNumber(null);
-    setMovedPiece(true);
-    if (diceNumber !== 6) setTurnIsOver(true);
+    if (diceNumber !== 6) {
+      setMovedPiece(true);
+      setTurnIsOver(true);
+    }
   };
+
   // Pass turn if all in home
   const checkIsHome = () => {
     if (
@@ -49,11 +52,12 @@ const TurnProvider = ({ children }) => {
       homeStats[`${colorPlaying}4`] &&
       diceNumber !== 6
     ) {
-      setTurnIsOver(true);
+      console.log("All in home");
+      setTimeout(() => setTurnIsOver(true), 1000);
     }
   };
 
-  // Create new turn
+  // Create new turnc:\Users\782760\AppData\Local\Programs\Microsoft VS Code\resources\app\out\vs\code\electron-sandbox\workbench\workbench.html
   useEffect(() => {
     if (turnIsOver) {
       let nextColor;
