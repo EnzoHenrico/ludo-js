@@ -101,7 +101,7 @@ const Dice = () => {
   }
 
   const handleRoll = () => {
-    if (!rolledDice) {
+    if (!rolledDice || !disabled) {
       let roll = Math.floor(Math.random() * (7 - 1)) + 1;
       setDiceNumber(roll);
       if (roll === 6) return;

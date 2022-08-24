@@ -1,14 +1,14 @@
-import Board from './components/Board';
-import { MatchProvider } from './contexts/match';
-import { TurnProvider } from './contexts/turn';
+import Board from "./components/Board";
+import { BoardProvider } from "./contexts/board";
+import { TurnProvider } from "./contexts/turn";
 
 function App() {
   return (
-    <MatchProvider>
+    <BoardProvider>
       <TurnProvider>
         <Board />
       </TurnProvider>
-    </MatchProvider>
+    </BoardProvider>
   );
 }
 

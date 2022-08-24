@@ -27,13 +27,13 @@ const TurnProvider = ({ children }) => {
     yellow4: true,
   });
 
-  console.log({
-    "color playing": colorPlaying,
-    "rolled dice? ": rolledDice,
-    "dice number": diceNumber,
-    "moved piece": movedPiece,
-    "home stats": homeStats,
-  });
+  // console.log({
+  //   "color playing": colorPlaying,
+  //   "rolled dice? ": rolledDice,
+  //   "dice number": diceNumber,
+  //   "moved piece": movedPiece,
+  //   "home stats": homeStats,
+  // });
 
   const finishMove = () => {
     setDiceNumber(null);

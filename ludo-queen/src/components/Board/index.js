@@ -1,6 +1,5 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
-import { MatchContext } from "../../contexts/match";
 import { TurnContext } from "../../contexts/turn";
 import squareColors from "./models/colors";
 import styles from "./Board.module.css";

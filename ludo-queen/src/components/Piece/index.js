@@ -1,30 +1,24 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { bluePath, greenPath, yeloowPath, redPath } from "./models/paths";
+import { BoardContext } from "../../contexts/board";
 import { TurnContext } from "../../contexts/turn";
 import getInitialPlaces from "./models/positions";
 import styles from "./Piece.module.css";
 
 const Piece = ({ number, color }) => {
-  const {
-    diceNumber,
-    colorPlaying,
-    setTurnIsOver,
-    finishMove,
-    homeStats,
-    setHomeStats,
-  } = useContext(TurnContext);
-  const InitialPlace = getInitialPlaces(number, color);
+  const { piecesPositions, setpiecesPositions } = useContext(BoardContext);
+  const { diceNumber, colorPlaying, finishMove, homeStats, setHomeStats } =
+    useContext(TurnContext);
+  const initialPlace = getInitialPlaces(number, color);
   const [pieceStatus, setPieceStatus] = useState({
-    currSquare: InitialPlace,
+    currSquare: initialPlace,
     cordenateIndex: 0,
-    isSafe: true,
-    isInEnd: false,
   });
 
   const pieceKey = `${color}-piece-${number}`;
   const pieceName = `${color}${number}`;
-  const pieceBaseCordenate = InitialPlace;
+  const pieceBaseCordenate = initialPlace;
 
   const getPiecePath = () => {
     if (color === "blue") {
@@ -51,7 +45,7 @@ const Piece = ({ number, color }) => {
     const nextIndex = crrIndex + diceNumber;
     const path = getPiecePath();
 
-    if (pieceStatus.currSquare === InitialPlace && diceNumber === 6) {
+    if (pieceStatus.currSquare === initialPlace && diceNumber === 6) {
       setTimeout(() => {
         setPieceStatus({
           ...pieceStatus,
@@ -59,6 +53,14 @@ const Piece = ({ number, color }) => {
           cordenateIndex: 1,
         });
         setHomeStats({ ...homeStats, [pieceName]: false });
+        const newValues = piecesPositions.map((piece) => {
+          if (piece.color === color && parseInt(piece.number) === number) {
+            return { ...piece, position: path[1] };
+          } else {
+            return { ...piece };
+          }
+        });
+        setpiecesPositions(newValues);
         finishMove();
       }, 500);
       return;
@@ -67,6 +69,7 @@ const Piece = ({ number, color }) => {
     if (crrIndex === path.length || nextIndex > path.length - 1) return;
 
     for (let i = 1; i <= diceNumber; i++) {
+      // CHECK IF IT IS A BLOCK && i++
       const cordenate = crrIndex + i;
       const square = path[cordenate];
       setTimeout(
@@ -79,10 +82,40 @@ const Piece = ({ number, color }) => {
         500 * i
       );
     }
-
     setHomeStats({ ...homeStats, [pieceName]: false });
+    const newValues = piecesPositions.map((piece) => {
+      if (piece.color === color && parseInt(piece.number) === number) {
+        return {
+          ...piece,
+          position: path[pieceStatus.cordenateIndex + diceNumber],
+        };
+      } else {
+        return { ...piece };
+      }
+    });
+    setpiecesPositions(newValues);
     setTimeout(() => finishMove(), 500 * diceNumber);
   };
+
+  const createBlock = () => {
+    // CREATE BLOCK OBJECT
+  };
+
+  const resetPiece = (team, id) => {
+    // RESET POSSITION
+  };
+
+  useEffect(() => {
+    console.log(piecesPositions);
+    piecesPositions.map((square) => {
+      if (
+        square.position === pieceStatus.currSquare &&
+        square.color !== color
+      ) {
+        //resetPiece(square.color, square.number);
+      }
+    });
+  }, [piecesPositions]);
 
   return (
     <>
