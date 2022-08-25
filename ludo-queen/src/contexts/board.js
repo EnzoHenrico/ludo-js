@@ -1,48 +1,34 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
 
 const BoardContext = createContext();
 
 const BoardProvider = ({ children }) => {
-  const [filledSpaces, setFilledSpaces] = useState([]);
-  const [piecesPositions, setpiecesPositions] = useState([
-    { color: "blue", number: "1", position: "" },
-    { color: "blue", number: "2", position: "" },
-    { color: "blue", number: "3", position: "" },
-    { color: "blue", number: "4", position: "" },
-    { color: "red", number: "1", position: "" },
-    { color: "red", number: "2", position: "" },
-    { color: "red", number: "3", position: "" },
-    { color: "red", number: "4", position: "" },
-    { color: "green", number: "1", position: "" },
-    { color: "green", number: "2", position: "" },
-    { color: "green", number: "3", position: "" },
-    { color: "green", number: "4", position: "" },
-    { color: "yellow", number: "1", position: "" },
-    { color: "yellow", number: "2", position: "" },
-    { color: "yellow", number: "3", position: "" },
-    { color: "yellow", number: "4", position: "" },
-  ]);
-
-  const safePlaces = [
-    "2/9",
-    "7/13",
-    "9/14",
-    "13/9",
-    "14/7",
-    "9/3",
-    "7/2",
-    "3/7",
-  ];
-
-  let fillesSquares = [
-    { color: "blue", number: "1", position: "12/7" },
-    { color: "red", number: "3", position: "8/8" },
-    { color: "green", number: "1", position: "1/1" },
-    { color: "yellow", number: "2", position: "12/7" },
-    { color: "green", number: "1", position: "1/2" },
-  ];
-
-  let lastMove = { color: "green", number: "1", position: "1/1" };
+  const [piecesPositions, setpiecesPositions] = useState({
+    blue: {
+      1: { position: "12/3", index: 0, home: true },
+      2: { position: "12/4", index: 0, home: true },
+      3: { position: "13/3", index: 0, home: true },
+      4: { position: "13/4", index: 0, home: true },
+    },
+    red: {
+      1: { position: "3/3", index: 0, home: true },
+      2: { position: "3/4", index: 0, home: true },
+      3: { position: "4/3", index: 0, home: true },
+      4: { position: "4/4", index: 0, home: true },
+    },
+    green: {
+      1: { position: "3/12", index: 0, home: true },
+      2: { position: "3/13", index: 0, home: true },
+      3: { position: "4/12", index: 0, home: true },
+      4: { position: "4/13", index: 0, home: true },
+    },
+    yellow: {
+      1: { position: "12/12", index: 0, home: true },
+      2: { position: "12/13", index: 0, home: true },
+      3: { position: "13/12", index: 0, home: true },
+      4: { position: "13/13", index: 0, home: true },
+    },
+  });
 
   return (
     <BoardContext.Provider value={{ piecesPositions, setpiecesPositions }}>

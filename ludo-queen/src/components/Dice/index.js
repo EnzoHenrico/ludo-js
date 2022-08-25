@@ -102,7 +102,7 @@ const Dice = () => {
 
   const handleRoll = () => {
     if (!rolledDice || !disabled) {
-      let roll = Math.floor(Math.random() * (7 - 1)) + 1;
+      let roll = Math.floor(Math.random() * 6) + 1;
       setDiceNumber(roll);
       if (roll === 6) return;
       setRolledDice(true);
@@ -119,12 +119,7 @@ const Dice = () => {
   }, [rolledDice]);
 
   return (
-    <div
-      onClick={handleRoll}
-      className={
-        disabled ? `${styles.face} ${styles.disabled}` : `${styles.face}`
-      }
-    >
+    <div onClick={handleRoll} className={styles.face}>
       {displayResult(diceNumber)}
     </div>
   );

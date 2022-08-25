@@ -1,38 +1,22 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { BoardContext } from "./board";
 
 const TurnContext = createContext();
 
 const TurnProvider = ({ children }) => {
+  const { piecesPositions } = useContext(BoardContext);
   const [colorPlaying, setColorPlaying] = useState("blue");
   const [diceNumber, setDiceNumber] = useState(null);
   const [rolledDice, setRolledDice] = useState(false);
   const [movedPiece, setMovedPiece] = useState(false);
   const [turnIsOver, setTurnIsOver] = useState(false);
-  const [homeStats, setHomeStats] = useState({
-    blue1: true,
-    blue2: true,
-    blue3: true,
-    blue4: true,
-    red1: true,
-    red2: true,
-    red3: true,
-    red4: true,
-    green1: true,
-    green2: true,
-    green3: true,
-    green4: true,
-    yellow1: true,
-    yellow2: true,
-    yellow3: true,
-    yellow4: true,
-  });
 
   // console.log({
   //   "color playing": colorPlaying,
   //   "rolled dice? ": rolledDice,
   //   "dice number": diceNumber,
   //   "moved piece": movedPiece,
-  //   "home stats": homeStats,
+  //   "pieces stats": piecesPositions[colorPlaying],
   // });
 
   const finishMove = () => {
@@ -46,13 +30,12 @@ const TurnProvider = ({ children }) => {
   // Pass turn if all in home
   const checkIsHome = () => {
     if (
-      homeStats[`${colorPlaying}1`] &&
-      homeStats[`${colorPlaying}2`] &&
-      homeStats[`${colorPlaying}3`] &&
-      homeStats[`${colorPlaying}4`] &&
+      piecesPositions[colorPlaying][1].home &&
+      piecesPositions[colorPlaying][2].home &&
+      piecesPositions[colorPlaying][3].home &&
+      piecesPositions[colorPlaying][4].home &&
       diceNumber !== 6
     ) {
-      console.log("All in home");
       setTimeout(() => setTurnIsOver(true), 1000);
     }
   };
@@ -96,8 +79,6 @@ const TurnProvider = ({ children }) => {
         turnIsOver,
         setTurnIsOver,
         finishMove,
-        homeStats,
-        setHomeStats,
         checkIsHome,
       }}
     >
