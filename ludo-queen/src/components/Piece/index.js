@@ -36,29 +36,6 @@ const Piece = ({ number, color }) => {
     }
   };
 
-  const eatPiece = (target) => {
-    console.log("EAT EAT EAT EAT EAT EAT EAT ");
-    piecesPositions.filter((piece) => {
-      if (piece.position === target && piece.team != color) {
-        piece.position = getInitialPlaces(piece.id, piece.team);
-        piece.index = 0;
-        piece.home = true;
-      }
-    });
-  };
-
-  const changePosition = (positionValue, indexValue, isHome) => {
-    const newPosition = piecesPositions.map((value) => {
-      if (value === piece) {
-        value.position = positionValue;
-        value.index = indexValue;
-        value.home = isHome;
-      }
-      return value;
-    });
-    setpiecesPositions(newPosition);
-  };
-
   const intialMove = (path) => {
     const intialPosition = path[1];
     const initialIndex = 1;
@@ -73,10 +50,17 @@ const Piece = ({ number, color }) => {
 
   const diceMove = (path, currentIndex) => {
     const targetSquare = path[currentIndex + diceNumber];
+
+    // create a block if the target contains a allied piece
+
     for (let i = 1; i <= diceNumber; i++) {
-      // DO CHECK IF IT IS A BLOCK && i++ **
       const newIndex = currentIndex + i;
       const newPosition = path[newIndex];
+      // check square, if is a block skip him
+      if (isBlock(newPosition)) {
+        i--;
+        continue;
+      }
       const isHome = false;
       setTimeout(() => {
         changePosition(newPosition, newIndex, isHome);
@@ -86,6 +70,52 @@ const Piece = ({ number, color }) => {
       eatPiece(targetSquare);
       finishMove();
     }, 500 * diceNumber);
+  };
+
+  const changePosition = (positionValue, indexValue, isHome) => {
+    const newPosition = piecesPositions.map((value) => {
+      if (value === piece) {
+        value.position = positionValue;
+        value.index = indexValue;
+        value.home = isHome;
+        value.block = false;
+      }
+      return value;
+    });
+    setpiecesPositions(newPosition);
+  };
+
+  const eatPiece = (target) => {
+    piecesPositions.filter((piece) => {
+      if (piece.position === target) {
+        if (piece.team !== color) {
+          console.log("EAT EAT EAT EAT EAT EAT EAT ");
+          piece.position = getInitialPlaces(piece.id, piece.team);
+          piece.index = 0;
+          piece.home = true;
+        } else {
+          console.log("BLOCÂO");
+          // createBlock(target);
+        }
+      }
+    });
+  };
+
+  const createBlock = (target) => {
+    piecesPositions.filter((piece) => {
+      if (piece.position === target) {
+        piece.block = true;
+      }
+    });
+  };
+
+  const isBlock = (target) => {
+    let block = false;
+
+    piecesPositions.filter((piece) => {
+      if (piece.position === target && piece.block) block = true;
+    });
+    return block;
   };
 
   const handleClick = () => {
@@ -112,7 +142,7 @@ const Piece = ({ number, color }) => {
   return (
     <>
       <div
-        className={styles[`pieceBase-${number}`]}
+        className={`${styles[`pieceBase-${number}`]} ${styles.block}`}
         style={{
           backgroundColor: `var(--${color})`,
           gridArea: initialPlace,
@@ -123,7 +153,7 @@ const Piece = ({ number, color }) => {
         onClick={handleClick}
         alt="pin"
         src={`${color}_pin.svg`}
-        className={styles[pieceKey]}
+        className={`${styles[pieceKey]} ${styles.block}`}
         style={{ transform: "scale(0.7)", gridArea: piece.position }}
       />
     </>
