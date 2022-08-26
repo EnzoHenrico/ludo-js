@@ -11,13 +11,12 @@ const TurnProvider = ({ children }) => {
   const [movedPiece, setMovedPiece] = useState(false);
   const [turnIsOver, setTurnIsOver] = useState(false);
 
-  // console.log({
-  //   "color playing": colorPlaying,
-  //   "rolled dice? ": rolledDice,
-  //   "dice number": diceNumber,
-  //   "moved piece": movedPiece,
-  //   "pieces stats": piecesPositions[colorPlaying],
-  // });
+  console.log({
+    "color playing": colorPlaying,
+    "rolled dice? ": rolledDice,
+    "dice number": diceNumber,
+    "moved piece": movedPiece,
+  });
 
   const finishMove = () => {
     setDiceNumber(null);
@@ -25,6 +24,7 @@ const TurnProvider = ({ children }) => {
       setMovedPiece(true);
       setTurnIsOver(true);
     }
+    setRolledDice(false);
   };
 
   // Pass turn if all in home

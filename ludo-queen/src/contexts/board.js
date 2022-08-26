@@ -25,21 +25,11 @@ const BoardProvider = ({ children }) => {
     { team: "yellow", id: 4, position: "13/13", index: 0, home: true },
   ]);
 
-  const [filledSquares, setFilledSquares] = useState([
-    { team: "blue", id: 1, position: "" },
-  ]);
-
-  // access : gridArea: `${x + 1}/${y + 1}`,
-
-  console.log(filledSquares);
-
   return (
     <BoardContext.Provider
       value={{
         piecesPositions,
         setpiecesPositions,
-        filledSquares,
-        setFilledSquares,
       }}
     >
       {children}

@@ -7,19 +7,9 @@ import getInitialPlaces from "./models/positions";
 import styles from "./Piece.module.css";
 
 const Piece = ({ number, color }) => {
-  const {
-    piecesPositions,
-    setpiecesPositions,
-    filledSquares,
-    setFilledSquares,
-  } = useContext(BoardContext);
+  const { piecesPositions, setpiecesPositions } = useContext(BoardContext);
   const { diceNumber, colorPlaying, finishMove } = useContext(TurnContext);
   const initialPlace = getInitialPlaces(number, color);
-
-  // const [pieceStatus, setPieceStatus] = useState({
-  //   currSquare: initialPlace,
-  //   cordenateIndex: 0,
-  // });
 
   const [piece] = piecesPositions.filter((value) => {
     if (value.team === color && value.id === number) {
@@ -27,7 +17,6 @@ const Piece = ({ number, color }) => {
     }
   });
 
-  console.log(piece);
   const pieceKey = `${color}-piece-${number}`;
 
   const getPiecePath = () => {
@@ -47,8 +36,15 @@ const Piece = ({ number, color }) => {
     }
   };
 
-  const checkSquare = () => {
-    // CHECK IF ALREADY HAS A ENEMY PIECE IN SQUARE
+  const eatPiece = (target) => {
+    console.log("EAT EAT EAT EAT EAT EAT EAT ");
+    piecesPositions.filter((piece) => {
+      if (piece.position === target && piece.team != color) {
+        piece.position = getInitialPlaces(piece.id, piece.team);
+        piece.index = 0;
+        piece.home = true;
+      }
+    });
   };
 
   const changePosition = (positionValue, indexValue, isHome) => {
@@ -76,6 +72,7 @@ const Piece = ({ number, color }) => {
   };
 
   const diceMove = (path, currentIndex) => {
+    const targetSquare = path[currentIndex + diceNumber];
     for (let i = 1; i <= diceNumber; i++) {
       // DO CHECK IF IT IS A BLOCK && i++ **
       const newIndex = currentIndex + i;
@@ -85,7 +82,10 @@ const Piece = ({ number, color }) => {
         changePosition(newPosition, newIndex, isHome);
       }, 500 * i);
     }
-    setTimeout(() => finishMove(), 500 * diceNumber);
+    setTimeout(() => {
+      eatPiece(targetSquare);
+      finishMove();
+    }, 500 * diceNumber);
   };
 
   const handleClick = () => {

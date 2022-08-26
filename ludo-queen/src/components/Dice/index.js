@@ -104,7 +104,10 @@ const Dice = () => {
     if (!rolledDice || !disabled) {
       let roll = Math.floor(Math.random() * 6) + 1;
       setDiceNumber(roll);
-      if (roll === 6) return;
+      if (roll === 6) {
+        setRolledDice(true);
+        return;
+      }
       setRolledDice(true);
       checkIsHome();
     }
