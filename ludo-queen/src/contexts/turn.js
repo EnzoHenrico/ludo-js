@@ -29,11 +29,15 @@ const TurnProvider = ({ children }) => {
 
   // Pass turn if all in home
   const checkIsHome = () => {
+    const pieces = piecesPositions.filter(
+      (piece) => piece.team === colorPlaying
+    );
+
     if (
-      piecesPositions[colorPlaying][1].home &&
-      piecesPositions[colorPlaying][2].home &&
-      piecesPositions[colorPlaying][3].home &&
-      piecesPositions[colorPlaying][4].home &&
+      pieces[0].home &&
+      pieces[1].home &&
+      pieces[2].home &&
+      pieces[3].home &&
       diceNumber !== 6
     ) {
       setTimeout(() => setTurnIsOver(true), 1000);

@@ -7,7 +7,12 @@ import getInitialPlaces from "./models/positions";
 import styles from "./Piece.module.css";
 
 const Piece = ({ number, color }) => {
-  const { piecesPositions, setpiecesPositions } = useContext(BoardContext);
+  const {
+    piecesPositions,
+    setpiecesPositions,
+    filledSquares,
+    setFilledSquares,
+  } = useContext(BoardContext);
   const { diceNumber, colorPlaying, finishMove } = useContext(TurnContext);
   const initialPlace = getInitialPlaces(number, color);
 
@@ -16,7 +21,13 @@ const Piece = ({ number, color }) => {
   //   cordenateIndex: 0,
   // });
 
-  const piece = piecesPositions[color][number];
+  const [piece] = piecesPositions.filter((value) => {
+    if (value.team === color && value.id === number) {
+      return value;
+    }
+  });
+
+  console.log(piece);
   const pieceKey = `${color}-piece-${number}`;
 
   const getPiecePath = () => {
@@ -36,66 +47,66 @@ const Piece = ({ number, color }) => {
     }
   };
 
-  const move = () => {
+  const checkSquare = () => {
+    // CHECK IF ALREADY HAS A ENEMY PIECE IN SQUARE
+  };
+
+  const changePosition = (positionValue, indexValue, isHome) => {
+    const newPosition = piecesPositions.map((value) => {
+      if (value === piece) {
+        value.position = positionValue;
+        value.index = indexValue;
+        value.home = isHome;
+      }
+      return value;
+    });
+    setpiecesPositions(newPosition);
+  };
+
+  const intialMove = (path) => {
+    const intialPosition = path[1];
+    const initialIndex = 1;
+    const isHome = false;
+
+    setTimeout(() => {
+      changePosition(intialPosition, initialIndex, isHome);
+      finishMove();
+    }, 500);
+    return;
+  };
+
+  const diceMove = (path, currentIndex) => {
+    for (let i = 1; i <= diceNumber; i++) {
+      // DO CHECK IF IT IS A BLOCK && i++ **
+      const newIndex = currentIndex + i;
+      const newPosition = path[newIndex];
+      const isHome = false;
+      setTimeout(() => {
+        changePosition(newPosition, newIndex, isHome);
+      }, 500 * i);
+    }
+    setTimeout(() => finishMove(), 500 * diceNumber);
+  };
+
+  const handleClick = () => {
+    const currentIndex = piece.index;
+    const nextIndex = currentIndex + diceNumber;
+    const path = getPiecePath();
     // Prevent move piece in wrong trun
     if (colorPlaying !== color || diceNumber === null) return;
+
     // Prevent move piece from home without a 6
     if (piece.home && diceNumber !== 6) return;
 
-    const crrIndex = piece.index;
-    const nextIndex = crrIndex + diceNumber;
-    const path = getPiecePath();
-
-    console.log({
-      name: `${color} ${number}`,
-      peice: piece,
-      initial: initialPlace,
-    });
+    // Prevent piece to move more than the boards end
+    if (currentIndex === path.length || nextIndex > path.length - 1) return;
 
     // Moving piece from initial place to first initial square
-    if (piece.position === initialPlace && diceNumber === 6) {
-      setTimeout(() => {
-        setpiecesPositions({
-          ...piecesPositions,
-          [color]: {
-            ...piecesPositions[color],
-            [number]: {
-              position: path[1],
-              index: 1,
-              home: false,
-            },
-          },
-        });
-        finishMove();
-      }, 500);
-      return;
-    }
-
-    // Prevent piece to move more than the boards end
-    if (crrIndex === path.length || nextIndex > path.length - 1) return;
+    if (piece.position === initialPlace && diceNumber === 6)
+      return intialMove(path);
 
     // Moving piece based on dice roll
-    for (let i = 1; i <= diceNumber; i++) {
-      // DO CHECK IF IT IS A BLOCK && i++ **
-      const cordenate = crrIndex + i;
-      const square = path[cordenate];
-      setTimeout(
-        () =>
-          setpiecesPositions({
-            ...piecesPositions,
-            [color]: {
-              ...piecesPositions[color],
-              [number]: {
-                position: square,
-                index: cordenate,
-                home: false,
-              },
-            },
-          }),
-        500 * i
-      );
-    }
-    setTimeout(() => finishMove(), 500 * diceNumber);
+    diceMove(path, currentIndex);
   };
 
   return (
@@ -109,7 +120,7 @@ const Piece = ({ number, color }) => {
       />
       <img
         key={pieceKey}
-        onClick={move}
+        onClick={handleClick}
         alt="pin"
         src={`${color}_pin.svg`}
         className={styles[pieceKey]}
