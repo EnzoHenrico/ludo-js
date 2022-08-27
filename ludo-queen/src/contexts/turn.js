@@ -59,7 +59,7 @@ const TurnProvider = ({ children }) => {
         nextColor = "blue";
       }
 
-      console.log({ "turn over": turnIsOver, "new color": nextColor });
+      // console.log({ "turn over": turnIsOver, "new color": nextColor });
 
       setColorPlaying(nextColor);
       setDiceNumber(null);

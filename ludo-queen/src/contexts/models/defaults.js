@@ -6,6 +6,7 @@ const piecesState = [
     index: 0,
     home: true,
     block: false,
+    finished: false,
   },
   {
     team: "blue",
@@ -14,6 +15,7 @@ const piecesState = [
     index: 0,
     home: true,
     block: false,
+    finished: false,
   },
   {
     team: "blue",
@@ -22,6 +24,7 @@ const piecesState = [
     index: 0,
     home: true,
     block: false,
+    finished: false,
   },
   {
     team: "blue",
@@ -30,12 +33,45 @@ const piecesState = [
     index: 0,
     home: true,
     block: false,
+    finished: false,
   },
 
-  { team: "red", id: 1, position: "3/3", index: 0, home: true, block: false },
-  { team: "red", id: 2, position: "3/4", index: 0, home: true, block: false },
-  { team: "red", id: 3, position: "4/3", index: 0, home: true, block: false },
-  { team: "red", id: 4, position: "4/4", index: 0, home: true, block: false },
+  {
+    team: "red",
+    id: 1,
+    position: "3/3",
+    index: 0,
+    home: true,
+    block: false,
+    finished: false,
+  },
+  {
+    team: "red",
+    id: 2,
+    position: "3/4",
+    index: 0,
+    home: true,
+    block: false,
+    finished: false,
+  },
+  {
+    team: "red",
+    id: 3,
+    position: "4/3",
+    index: 0,
+    home: true,
+    block: false,
+    finished: false,
+  },
+  {
+    team: "red",
+    id: 4,
+    position: "4/4",
+    index: 0,
+    home: true,
+    block: false,
+    finished: false,
+  },
 
   {
     team: "green",
@@ -44,6 +80,7 @@ const piecesState = [
     index: 0,
     home: true,
     block: false,
+    finished: false,
   },
   {
     team: "green",
@@ -52,6 +89,7 @@ const piecesState = [
     index: 0,
     home: true,
     block: false,
+    finished: false,
   },
   {
     team: "green",
@@ -60,6 +98,7 @@ const piecesState = [
     index: 0,
     home: true,
     block: false,
+    finished: false,
   },
   {
     team: "green",
@@ -68,6 +107,7 @@ const piecesState = [
     index: 0,
     home: true,
     block: false,
+    finished: false,
   },
 
   {
@@ -77,6 +117,7 @@ const piecesState = [
     index: 0,
     home: true,
     block: false,
+    finished: false,
   },
   {
     team: "yellow",
@@ -85,6 +126,7 @@ const piecesState = [
     index: 0,
     home: true,
     block: false,
+    finished: false,
   },
   {
     team: "yellow",
@@ -93,6 +135,7 @@ const piecesState = [
     index: 0,
     home: true,
     block: false,
+    finished: false,
   },
   {
     team: "yellow",
@@ -101,6 +144,7 @@ const piecesState = [
     index: 0,
     home: true,
     block: false,
+    finished: false,
   },
 ];
 
