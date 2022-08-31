@@ -19,18 +19,13 @@ const Piece = ({ number, color }) => {
   });
 
   const currentIndex = currentPiece.index;
-  const pieceKey = `${color}-piece-${number}`;
-  const targetIndex = currentIndex + diceNumber;
 
   const intialMove = (path) => {
-    const intialPosition = path[1];
-    const initialIndex = 1;
-    const isHome = false;
-
+    // Move to first position
     setTimeout(() => {
-      changePosition(intialPosition, initialIndex, isHome);
+      changePosition(path[1], 1);
       finishMove();
-    }, 500);
+    }, 300);
     return;
   };
 
@@ -137,7 +132,12 @@ const Piece = ({ number, color }) => {
     if (currentPiece.home && diceNumber !== 6) return;
 
     // Prevent piece to move more than the boards end
-    if (currentIndex === path.length || targetIndex > path.length - 1) return;
+    if (
+      currentIndex === path.length ||
+      currentIndex + diceNumber > path.length - 1
+    ) {
+      return;
+    }
 
     // Moving piece from initial place to first initial square
     if (currentPiece.position === initialPlace && diceNumber === 6)
@@ -157,11 +157,11 @@ const Piece = ({ number, color }) => {
         }}
       />
       <img
-        key={pieceKey}
+        key={`${color}-piece-${number}`}
         onClick={handleClick}
         alt="pin"
         src={`${color}_pin.svg`}
-        className={`${styles[pieceKey]} ${styles.block}`}
+        className={`${styles[`${color}-piece-${number}`]} ${styles.block}`}
         style={{ transform: "scale(0.7)", gridArea: currentPiece.position }}
       />
     </>
@@ -169,37 +169,3 @@ const Piece = ({ number, color }) => {
 };
 
 export default Piece;
-
-// Backup
-// let targetSquare = path[currentIndex + diceNumber];
-// let i = 1;
-
-// console.log(currentPiece);
-
-// while (i <= diceNumber) {
-//   let newIndex = currentIndex + i;
-//   let newPosition = path[newIndex];
-//   if (isBlock(newPosition, color)) {
-//     setTimeout(
-//       () => changePosition(path[newIndex + 1], newIndex + 1),
-//       500 * i
-//     );
-//     targetSquare = path[currentIndex + diceNumber + 1];
-//     i++
-//     continue;
-//   }
-//   setTimeout(() => changePosition(newPosition, newIndex), 500 * i);
-//   i++;
-// }
-
-// // Check if piece reached board final
-
-// setTimeout(
-//   () =>
-//     // Create a block or eat enemy piece
-//     checkTarget(targetSquare),
-//   500 * diceNumber
-// );
-// setTimeout(() => {
-//   finishMove();
-// }, 500 * diceNumber);
