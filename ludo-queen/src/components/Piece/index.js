@@ -34,28 +34,53 @@ const Piece = ({ number, color }) => {
     return;
   };
 
-  const diceMove = (targetSquare, path, currentIndex) => {
-    console.log(currentPiece);
-    for (let i = 1; i <= diceNumber; i++) {
-      const isHome = false;
-      const newIndex = currentIndex + i;
-      const newPosition = path[newIndex];
-      // create a block if the target contains a allied piece
-      if (isBlock()) {
-        console.log("found block", newPosition);
-      }
-      setTimeout(() => changePosition(newPosition, newIndex, isHome), 500 * i);
-    }
-    // Check if piece reached final
-    if (currentIndex + diceNumber === path.length) finishPeice();
+  const diceMove = (piecePathing) => {
+    const pathToMove = [];
+    let i = 0;
+    let roll = diceNumber;
+    // Pathing array*
+    while (i <= roll) {
+      let index = currentIndex + i;
 
-    setTimeout(() => checkTarget(targetSquare), 500 * diceNumber);
+      // Jump square when its a block
+      if (isBlock(piecePathing[index], color)) {
+        pathToMove.push(piecePathing[index + 1]);
+        i++;
+        roll++;
+        continue;
+      }
+
+      pathToMove.push(piecePathing[index]);
+      i++;
+    }
+
+    // Move pieces
+    for (let pathIndex = 0; pathIndex < pathToMove.length; pathIndex++) {
+      setTimeout(() => {
+        changePosition(pathToMove[pathIndex], currentIndex + pathIndex);
+      }, 300 * pathIndex);
+    }
+
+    if (currentIndex + diceNumber === piecePathing.length) finishPeice();
+
     setTimeout(() => {
+      checkTarget(pathToMove[roll]);
       finishMove();
-    }, 500 * diceNumber);
+    }, 300 * roll);
   };
 
-  const changePosition = (positionValue, indexValue, isHome) => {
+  const isBlock = (position, team) => {
+    const isBlock = piecesPositions.filter((piece) => {
+      if (piece.position === position && piece.team !== team) {
+        return piece.block;
+      }
+      return false;
+    });
+
+    return isBlock.length === 0 ? false : true;
+  };
+
+  const changePosition = (positionValue, indexValue) => {
     const newPosition = piecesPositions.map((piece) => {
       if (piece === currentPiece) {
         currentPiece.position = positionValue;
@@ -76,6 +101,7 @@ const Piece = ({ number, color }) => {
       if (piece.position === target) {
         // Eat piece
         if (piece.team !== color) {
+          console.log("Piece eated", piece, currentPiece);
           piece.position = getInitialPlaces(piece.id, piece.team);
           piece.index = 0;
           piece.home = true;
@@ -88,19 +114,6 @@ const Piece = ({ number, color }) => {
         }
       }
     });
-  };
-
-  const isBlock = () => {
-    let block = false;
-    piecesPositions.filter((piece) => {
-      if (
-        piece.position === currentPiece.position &&
-        piece.block &&
-        piece.color !== color
-      )
-        block = true;
-    });
-    return block;
   };
 
   const finishPeice = () => {
@@ -116,7 +129,6 @@ const Piece = ({ number, color }) => {
 
   const handleClick = () => {
     const path = getPiecePath(color);
-    const targetSquare = path[currentIndex + diceNumber];
 
     // Prevent move piece in wrong trun
     if (colorPlaying !== color || diceNumber === null) return;
@@ -132,7 +144,7 @@ const Piece = ({ number, color }) => {
       return intialMove(path);
 
     // Moving piece based on dice roll
-    diceMove(targetSquare, path, currentIndex);
+    diceMove(path);
   };
 
   return (
@@ -157,3 +169,37 @@ const Piece = ({ number, color }) => {
 };
 
 export default Piece;
+
+// Backup
+// let targetSquare = path[currentIndex + diceNumber];
+// let i = 1;
+
+// console.log(currentPiece);
+
+// while (i <= diceNumber) {
+//   let newIndex = currentIndex + i;
+//   let newPosition = path[newIndex];
+//   if (isBlock(newPosition, color)) {
+//     setTimeout(
+//       () => changePosition(path[newIndex + 1], newIndex + 1),
+//       500 * i
+//     );
+//     targetSquare = path[currentIndex + diceNumber + 1];
+//     i++
+//     continue;
+//   }
+//   setTimeout(() => changePosition(newPosition, newIndex), 500 * i);
+//   i++;
+// }
+
+// // Check if piece reached board final
+
+// setTimeout(
+//   () =>
+//     // Create a block or eat enemy piece
+//     checkTarget(targetSquare),
+//   500 * diceNumber
+// );
+// setTimeout(() => {
+//   finishMove();
+// }, 500 * diceNumber);

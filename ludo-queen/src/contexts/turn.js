@@ -11,13 +11,6 @@ const TurnProvider = ({ children }) => {
   const [movedPiece, setMovedPiece] = useState(false);
   const [turnIsOver, setTurnIsOver] = useState(false);
 
-  // console.log({
-  //   "color playing": colorPlaying,
-  //   "rolled dice? ": rolledDice,
-  //   "dice number": diceNumber,
-  //   "moved piece": movedPiece,
-  // });
-
   const finishMove = () => {
     setDiceNumber(null);
     if (diceNumber !== 6) {
